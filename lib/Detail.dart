@@ -6,7 +6,7 @@ class Detail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1F2326), // background gelap
+      backgroundColor: const Color(0xFF1F2326),
       appBar: AppBar(
         backgroundColor: const Color(0xFF1F2326),
         elevation: 0,
