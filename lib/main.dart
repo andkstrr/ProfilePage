@@ -1,89 +1,115 @@
 import 'package:flutter/material.dart';
-import 'Detail.dart';
+import 'package:my_first_app/Home.dart';
+import 'package:my_first_app/detail.dart';
 
 void main() => runApp(MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Home(), // halaman awal ketika program pertama dijalankan
-    ));
+  home: LoginPage(),
+));
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
+  State<LoginPage> createState() => _AppStatefulState();
+}
+
+class _AppStatefulState extends State<LoginPage> {
+  int jumlahKlik = 0;
+
+  void _klikNambah() {
+    setState(() {
+      jumlahKlik++;
+    });
+  }
+  
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: MediaQuery.of(context).size.width, // lebar diatur sesuai dengan lebar layar
-        height: MediaQuery.of(context).size.height, // lebar diatur sesuai dengan lebar layar
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("images/background.png"),
-            fit: BoxFit.cover,
-          ),
-        ),
-          child: Stack(
-            alignment: Alignment.center,
-            children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                padding: EdgeInsets.all(20.0), // padding luar Container
-                alignment: Alignment.center,
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: const Color(0xFF1F2326),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(25.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "Welcome Back! 👋",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 26,
                   ),
-                  color: Color.fromRGBO(58, 58, 58, 1),
-                  child: Padding(
-                    padding: EdgeInsets.all(15.0), // padding dalam Card
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min, // agar height Card menyesuaikan konten
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        CircleAvatar(
-                          radius: 100.0,
-                          backgroundImage: AssetImage("images/profile.jpg"),
-                        ),
-                        SizedBox(height: 16), 
-                        Text(
-                          "Andika Satrio Nurcahyo",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 20, 
-                            fontWeight: FontWeight.bold, 
-                            color: Colors.white,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          "Vocational High School Student at SMK Wikrama Bogor",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 13, 
-                            fontWeight: FontWeight.normal, 
-                            color: Colors.white,
-                          ),
-                        ),
-                        SizedBox(height: 12),
-                        TextButton(
-                          onPressed: (){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Detail()),
-                            ); 
-                          }, 
-                          child: Text(
-                            "See More",
-                            style: TextStyle(color: Colors.blue),
-                          ),
-                        ),
-                      ],
+                ),
+                const SizedBox(height: 40.0),
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "Input your email",
+                    hintText: "Email",
+                    labelStyle: const TextStyle(color: Colors.white),
+                    hintStyle: const TextStyle(color: Colors.white),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
                 ),
-              )
-            ],
+                const SizedBox(height: 30.0),
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "Input your password",
+                    hintText: "Password",
+                    labelStyle: const TextStyle(color: Colors.white),
+                    hintStyle: const TextStyle(color: Colors.white),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                  obscureText: true,
+                ),
+                const SizedBox(height: 30.0),
+                SizedBox(
+                  width: double.infinity, // full width
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      backgroundColor: Colors.white,
+                      foregroundColor: const Color(0xFF1F2326),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context, 
+                        MaterialPageRoute(
+                          builder: (context) => Home(
+                            total: jumlahKlik
+                          )
+                        )
+                      );
+                      _klikNambah();
+                    },
+                    child: const Text(
+                      "Login",
+                      style: TextStyle(
+                        fontSize: 16, 
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 50.0,),
+                // Text(
+                //   "$jumlahKlik",
+                //   style: TextStyle(
+                //     color: Colors.white,
+                //     fontSize: 20
+                //   ),
+                // )
+              ],
+            ),
           ),
+        ),
       ),
     );
   }
