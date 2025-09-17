@@ -3,7 +3,8 @@ import 'Detail.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home(total: 0,), // halaman awal ketika program pertama dijalankan
+      home: Home(total: 0
+      ,), // halaman awal ketika program pertama dijalankan
     ));
 
 class Home extends StatelessWidget {
