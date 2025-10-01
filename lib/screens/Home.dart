@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Detail.dart';
 
-void main() => runApp(MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Home(total: 0
-      ,), // halaman awal ketika program pertama dijalankan
-    ));
-
 class Home extends StatelessWidget {
   const Home({super.key, required this.total});
   final int total;
